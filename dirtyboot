@@ -1,0 +1,32 @@
+#! /bin/bash
+
+DIRTYBOOT_MARK=${DIRTYBOOT_DIR:=/var/lib}/dirtyboot
+
+function onBoot {
+if [ -f "$DIRTYBOOT_MARK" ]; then
+    logger -t dirtyboot -p notice "Dirty reboot detected"
+fi  
+if ! echo "Records last boot time" > "$DIRTYBOOT_MARK"; then
+    logger -t dirtyboot -p error "Unable to create boot mark"
+fi
+}
+
+function onShutdown {
+if [ -e "$DIRTYBOOT_MARK" ]; then
+    rm "$DIRTYBOOT_MARK"
+fi
+}
+
+case $1 in
+    start)
+        onBoot
+        ;;
+    stop)
+        onShutdown
+        ;;
+    *)
+        echo "Usage: $0 start | stop"
+        exit 1
+        ;;
+esac
+

@@ -1,0 +1,11 @@
+[Unit]
+Description=Dirty boot detector
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/dirtyboot start
+ExecStop=/usr/sbin/dirtyboot stop
+
+[Install]
+WantedBy=basic.target
