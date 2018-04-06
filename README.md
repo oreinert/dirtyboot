@@ -16,6 +16,10 @@ Thus, if the marker file is already present when the service starts, it means
 the system wasn't shut down cleanly before rebooting. Whenever this condition
 occurs, the service writes a corresponding warning to the system log.
 
+## Prerequisites
+
+A Linux system based on [systemd](https://freedesktop.org/wiki/Software/systemd/).
+
 ## Inspecting dirty boot warnings
 
 Run the command
